@@ -43,12 +43,13 @@ public interface UserIdentifyRepository extends BaseRepository<UserIdentifyFK, L
      * 第三种，使用原生sql方式查询。
      * 优点：原生sql最自由。
      * 缺点：如果语法错误只有在运行的时候才会报错，不支持换数据库（场景较少）。
-     * 备注：使用了？和：两种传参的方式。第一种教简洁，填写参数位置即可（从1开始）。
-     * 第二种需要@Param注解，比较繁琐但方便查看。
+     * 备注：传递参数可以使用？和:两种方式。
+     * 第一种教简洁，填写参数位置即可（从1开始）。
+     * 第二种需要@Param注解，比较繁琐而且必选给全部参数都加上，除了Pageable和Sort。优点是查询语句可以一目了然。
      */
     @Query(nativeQuery = true, value = "select ui from user_identify ui " +
-            "where ui.user_name=?1 and ui.password=:password limit 1")
-    UserIdentifyFK loginValidateSql(String username, @Param("password") String password);
+            "where ui.user_name=:username and ui.password=:password limit 1")
+    UserIdentifyFK loginValidateSql(@Param("username") String username, @Param("password") String password);
 
 
 }

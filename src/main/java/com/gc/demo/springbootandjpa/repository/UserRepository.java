@@ -5,6 +5,7 @@ import com.gc.demo.springbootandjpa.entity.UserResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,7 @@ public interface UserRepository extends BaseRepository<User, Integer> {
      * 分页查询
      * 注意：在最后一个参数加上Pageable即可，返回类型为Page。
      * Pageable为分页参数，可以通过PageRequest.of(0,10)方法指定分页参数，page：页码（0开始）。size：每页数量。
+     * 类似的参数还有Sort，但两个不能同时存在。Pageable中可以设置排序规则。
      *
      * @param name
      * @param pageable
