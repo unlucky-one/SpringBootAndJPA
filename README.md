@@ -52,5 +52,5 @@ none或update。<br>
 &emsp;&emsp;`UserIdentifyRepository`中列出三种Jpa的查询方式。还有一种@NamedQuery方式因为要修改实体类，
 所以本项目没有用到。<br>
 &emsp;&emsp;`UserRepository`中展示类分页查询和返回自定义类的方法。<br>
-&emsp;&emsp;还有更多技巧希望大家补充！
+### &emsp;&emsp;还有更多技巧希望大家补充！
 
