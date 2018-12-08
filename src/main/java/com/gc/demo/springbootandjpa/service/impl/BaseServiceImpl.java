@@ -45,7 +45,7 @@ public class BaseServiceImpl<R extends BaseRepository> implements BaseService {
 
     @Override
     public int deleteWithStatus(Object id) {
-        return repository.deleteWithStatus(id);
+        return repository.deleteWithState(id);
     }
 
     @Override

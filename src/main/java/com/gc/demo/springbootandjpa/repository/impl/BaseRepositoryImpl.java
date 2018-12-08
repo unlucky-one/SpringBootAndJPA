@@ -157,8 +157,8 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
 
 
     @Override
-    public int deleteWithStatus(Object id) {
-        return fakeDelete(id, "state", 2);
+    public int deleteWithState(ID id) {
+        return fakeDelete(id, "state", -1);
     }
 
     /**
@@ -166,7 +166,7 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
      */
     @Override
     @Transactional
-    public int fakeDelete(Object id, String columnName, int state) {
+    public int fakeDelete(ID id, String columnName, int state) {
         Field field = null;
         try {
             field = entityClass.getDeclaredField(columnName);
@@ -174,7 +174,8 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
             e.printStackTrace();
         }
         if (field == null) {
-            return -1;
+            deleteById(id);
+            return 1;
         }
         CriteriaUpdate<T> criteriaUpdate = entityManager.getCriteriaBuilder().createCriteriaUpdate(entityClass);
         Predicate predicate = entityManager.getCriteriaBuilder().equal(criteriaUpdate.from(entityClass)
