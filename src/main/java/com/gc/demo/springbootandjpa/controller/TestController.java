@@ -1,8 +1,10 @@
 package com.gc.demo.springbootandjpa.controller;
 
+import com.gc.demo.springbootandjpa.Listener.MyHttpSessionListener;
 import com.gc.demo.springbootandjpa.entity.User;
 import com.gc.demo.springbootandjpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,10 @@ public class TestController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/getOnlineCount")
+    Long getOnlineCount() {
+        return MyHttpSessionListener.COUNT_ONLINE.longValue();
+    }
 
     @PostMapping("/addUser")
     Object test() {

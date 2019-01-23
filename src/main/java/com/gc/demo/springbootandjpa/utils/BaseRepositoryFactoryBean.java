@@ -42,14 +42,14 @@ public class BaseRepositoryFactoryBean<R extends JpaRepository<T, I>, T,
             this.em = em;
         }
 
-        //设置具体的实现类是BaseRepositoryImpl
-        @Override
-        protected Object getTargetRepository(RepositoryInformation information) {
-//            return new BaseRepositoryImpl<T, I>((Class<T>) information.getDomainType(), em);
-            JpaEntityInformation<?, ?> entityInformation = getEntityInformation(information.getDomainType());
-            return getTargetRepositoryViaReflection(information, entityInformation, em);
-
-        }
+//        //设置具体的实现类是BaseRepositoryImpl
+//        @Override
+//        protected Object getTargetRepository(RepositoryInformation information) {
+////            return new BaseRepositoryImpl<T, I>((Class<T>) information.getDomainType(), em);
+//            JpaEntityInformation<?, ?> entityInformation = getEntityInformation(information.getDomainType());
+//            return getTargetRepositoryViaReflection(information, entityInformation, em);
+//
+//        }
 
         //设置具体的实现类的class
         @Override

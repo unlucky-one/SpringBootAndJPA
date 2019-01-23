@@ -36,14 +36,16 @@ public class MyResponseAdvice implements ResponseBodyAdvice<Object> {
             return body;
         } else if (body instanceof MyAppResult) {
             return Tools.getResult((MyAppResult) body);
+        } else if (body instanceof String) {
+            return body;
         } else {
             return Tools.getSuccessResult(body);
         }
     }
 
     /*
-    * 处理全局错误错误返回
-    * */
+     * 处理全局错误错误返回
+     * */
 //    @ExceptionHandler
 //    @ResponseBody
 //    public Object exceptionHandler(Exception e) {

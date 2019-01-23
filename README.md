@@ -7,6 +7,8 @@
 <br>
 &emsp;&emsp;<a href="#3">技巧篇</a>
 <br>
+![架构图](SpringBoot%20Jpa%20架构.png)
+<br>
 &emsp;&emsp;搭建了一套Spring Boot的微服务，数据库操作使用JPA。<br>
 &emsp;&emsp;主要是自定义了BaseRepository类，实现了一些自定义方法，尽量的缩减了重复代码，欢迎爱好者共同学习。<br>
 ### 前言<br>

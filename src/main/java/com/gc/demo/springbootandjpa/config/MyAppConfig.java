@@ -17,6 +17,9 @@ import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.*;
 
 import java.io.IOException;
@@ -56,8 +59,7 @@ public class MyAppConfig extends WebMvcConfigurationSupport {
         //忽略拦截的路径
         registry.addInterceptor(new MyAppInterceptor())
                 .addPathPatterns("/**")
-//                .excludePathPatterns("/lib/**")
-                .excludePathPatterns("/static/**")
+                .excludePathPatterns("/test/**")
                 .excludePathPatterns("/js/**")
                 .excludePathPatterns("/css/**")
                 .excludePathPatterns("/images/**")
@@ -114,11 +116,8 @@ public class MyAppConfig extends WebMvcConfigurationSupport {
                 ObjectMapper mapper = new ObjectMapper();
                 String json = mapper.writeValueAsString(object);
                 logger.error(json);
-                // 加密
-                String result = json + "加密了！";
-                logger.error(result);
                 // 输出
-                outputMessage.getBody().write(result.getBytes());
+                outputMessage.getBody().write(json.getBytes());
             }
         };
     }
@@ -166,6 +165,23 @@ public class MyAppConfig extends WebMvcConfigurationSupport {
         CorsRegistration corsRegistration = registry.addMapping("/**");
         corsRegistration.allowedOrigins("*").allowedMethods("*").allowCredentials(true).maxAge(3600);
     }
+
+    /**
+     * 跨域
+     */
+//    @Bean
+//    public FilterRegistrationBean corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("*");
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+//        bean.setOrder(0);
+//        return bean;
+//    }
 
     /**
      * 增加过滤器，用于收集所有请求

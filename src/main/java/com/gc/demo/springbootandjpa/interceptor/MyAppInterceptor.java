@@ -24,6 +24,7 @@ public class MyAppInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //用于支持options请求
         if(request.getMethod().toLowerCase().equals("options"))
             return true;
         BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
@@ -48,9 +49,6 @@ public class MyAppInterceptor extends HandlerInterceptorAdapter {
 
     private void returnJson(HttpServletResponse response, String json) {
         PrintWriter writer = null;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-        response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS,JSON");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
         response.setStatus(400);
